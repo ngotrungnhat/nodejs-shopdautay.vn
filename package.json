@@ -1,0 +1,40 @@
+{
+    "name": "nodejs-ecommerce",
+    "version": "1.0.0",
+    "description": "Practice Nodejs MongoDB via website Ecommerce",
+    "main": "index.js",
+    "scripts": {
+        "start": "babel-node src/app.js --presets es2015",
+        "dev": "nodemon ./src/app.js --exec babel-node",
+        "test": "NODE_ENV=test mocha --compilers js:babel-core/register test/*"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ngotrungnhat/nodejs-ecommerce.git"
+    },
+    "author": "One One",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/ngotrungnhat/nodejs-ecommerce/issues"
+    },
+    "homepage": "https://github.com/ngotrungnhat/nodejs-ecommerce#readme",
+    "dependencies": {
+        "bcrypt": "^3.0.6",
+        "body-parser": "^1.19.0",
+        "cookie-parser": "^1.4.4",
+        "debug": "^4.1.1",
+        "express": "^4.17.1",
+        "express-async-errors": "^3.1.1",
+        "http-errors": "^1.7.3",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^5.7.1",
+        "mongoose-timestamp": "^0.6.0",
+        "morgan": "^1.9.1",
+        "nodemon": "^1.19.4",
+        "saslprep": "^1.0.3"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-preset-es2015": "^6.24.1"
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "port": 3000,
+    "db": {
+        "host": "localhost:27018",
+        "dbName": "nodejsEcommerce",
+        "username": "nhatnt",
+        "password": "abc123"
+    },
+    "token": {
+        "secret_key": "secret_key",
+        "lifetimes": 36000
+    }
+}

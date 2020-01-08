@@ -1,2 +1,2 @@
-# nodejs-shopdautay.vn
-Source code for website shopdautay.vn
+# nodejs-ecommerce
+Practice nodejs mongoDB via website Ecommerce

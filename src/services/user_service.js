@@ -10,20 +10,27 @@ class UserService extends BaseService {
     }
 
     async createNormalUser(userData) {
-        const { email } = userData
-        const user = await this.dao.getUserByEmail(email)
-        if (user) {
+        const { email, phone } = userData;
+        const userEmail = await this.dao.getUserByEmail(email);
+        const userPhoneNumber = await this.dao.getUserByPhoneNumber(phone);
+        
+        if (userEmail) {
             throw new CommonError(
                 ResponseCode.CONFLICT,
                 undefined,
                 'This is email alredy exists!'
             )
         }
+        if (userPhoneNumber) {
+            throw new CommonError(
+                ResponseCode.CONFLICT,
+                undefined,
+                'This is phone number alredy exists!'
+            )
+        }
 
         const currentMsTime = DateTimeUtils.getCurrentMsTime()
         const insertedUser = await this.dao.insertRecord(userData)
-
-        
 
         return insertedUser
     }

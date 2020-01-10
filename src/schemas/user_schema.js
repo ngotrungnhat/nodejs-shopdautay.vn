@@ -10,7 +10,7 @@ const Schema = mongoose.Schema
 const SALT_ROUND = 10
 const date = new Date()
 const fomartDate =
-    date.getDate() + '/' + date.getMonth() + '/' + date.getUTCFullYear()
+    date.getDate() + '/' + (date.getMonth()+1) + '/' + date.getUTCFullYear()
 
 const UserSchema = new Schema(
     {
@@ -18,10 +18,9 @@ const UserSchema = new Schema(
             type: Number,
             default: UserType.NORMAL_LOGIN_USER,
         },
-        name: {
-            type: String,
-            default: 'unknow',
-        },
+        userName: String,
+        firstName: String,
+        lastName: String,
         email: {
             type: String,
             unique: true,
@@ -30,21 +29,16 @@ const UserSchema = new Schema(
             type: Number,
             unique: true,
         },
-        password: {
-            type: String,
-        },
-        age: {
-            type: Number,
-        },
-        address: {
-            type: String,
-        },
+        password: String,
+        age: Number,
+        aboutMe: String,
+        address: String,
         isActive: {
             type: Number,
             default: 0,
             createdAt: {
                 type: Number,
-                default: 0,
+                default: null,
             },
         },
         cart: {
@@ -59,6 +53,22 @@ const UserSchema = new Schema(
             type: String,
             default: fomartDate,
         },
+        changePasswordCode: {
+            code: {
+                type: String,
+                default: null
+            },
+            createdAt: {
+                type: Number,
+                default: 0
+            }
+        },
+        activeCode: {
+            code: {
+                default: null,
+                type: Number
+            }
+        }
     },
     { collection: Collections.USERS }
 )

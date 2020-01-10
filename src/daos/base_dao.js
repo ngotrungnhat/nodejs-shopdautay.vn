@@ -1,3 +1,4 @@
+
 class BaseDAO {
     constructor(schema) {
         this.schema = schema
@@ -6,6 +7,7 @@ class BaseDAO {
     //     const record = await this.schema.findById(id)
     //     return record
     // }
+
     async insertRecord(recordData) {
         const record = new this.schema(recordData)
         await record.save()

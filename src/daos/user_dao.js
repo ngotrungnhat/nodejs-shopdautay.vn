@@ -13,6 +13,14 @@ class UserDAO extends BaseDAO {
         const user = await UserSchema.findOne(conditions)
         return user
     }
+
+    async getUserByPhoneNumber(phoneNumber) {
+        const conditions = {
+            phone: phoneNumber
+        }
+        const user = await UserSchema.findOne(conditions)
+        return user
+    }
 }
 
 export default UserDAO

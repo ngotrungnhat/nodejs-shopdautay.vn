@@ -30,25 +30,25 @@ class UserController extends BaseController {
         const {userName, firstName, lastName, email, phone, password, address} = userData;
         const errors = [];
 
-        if (!DataUtils.isHasValue(userName.trim()) || !DataUtils.isValidUserName(userName.trim())) {
+        if (!DataUtils.isHasValue(userName) || !DataUtils.isValidUserName(userName)) {
             errors.push(new ApiError(ErrorCode.INVALID_PARAM, "Invalid userName", LocationType.BODY, "/userName"));
         }
-        if (!DataUtils.isHasValue(firstName.trim()) || !DataUtils.isValidName(firstName.trim())) {
+        if (!DataUtils.isHasValue(firstName) || !DataUtils.isValidName(firstName)) {
             errors.push(new ApiError(ErrorCode.INVALID_PARAM, "Invalid firstName", LocationType.BODY, "/firstName"));
         }
-        if (!DataUtils.isHasValue(lastName.trim()) || !DataUtils.isValidName(lastName.trim())) {
+        if (!DataUtils.isHasValue(lastName) || !DataUtils.isValidName(lastName)) {
             errors.push(new ApiError(ErrorCode.INVALID_PARAM, "Invalid lastName", LocationType.BODY, "/lastName"));
         }
-        if (!DataUtils.isHasValue(email.trim()) || !DataUtils.isValidEmailAddress(email.trim())) {
+        if (!DataUtils.isHasValue(email) || !DataUtils.isValidEmailAddress(email)) {
             errors.push(new ApiError(ErrorCode.INVALID_PARAM, "Invalid email", LocationType.BODY, "/email"));
         }
-        if (!DataUtils.isHasValue(phone.trim()) || !DataUtils.isValidPhoneNumber(phone.trim())) {
+        if (!DataUtils.isHasValue(phone) || !DataUtils.isValidPhoneNumber(phone)) {
             errors.push(new ApiError(ErrorCode.INVALID_PARAM, "Invalid phone number", LocationType.BODY, "/phone"));
         }
-        if (!DataUtils.isHasValue(password.trim()) || !DataUtils.isValidPassword(password.trim())) {
+        if (!DataUtils.isHasValue(password) || !DataUtils.isValidPassword(password)) {
             errors.push(new ApiError(ErrorCode.INVALID_PARAM, "Invalid password", LocationType.BODY, "/password"));
         }
-        if (!DataUtils.isHasValue(address.trim())) {
+        if (!DataUtils.isHasValue(address)) {
             errors.push(new ApiError(ErrorCode.INVALID_PARAM, "Invalid address", LocationType.BODY, "/address"));
         }
 

@@ -1,4 +1,4 @@
-
+import crypto from "crypto";
 
 const EMAIL_MIN_LENGTH = 6;
 const EMAIL_MAX_LENGTH = 128;
@@ -63,6 +63,14 @@ class DataUtils {
     static isValidCode(code) {
         const length = code ? code.length : 0;
         return length >= CODE_MIN_LENGTH && length <= CODE_MAX_LENGTH && CODE_REGEX.test(code);
+    }
+
+    static randomKey() {
+        const length = length > 0 ? length : 3
+        return crypto
+                .randomBytes(length)
+                .toString("hex")
+                .toUpperCase()
     }
 
 

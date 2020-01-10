@@ -3,6 +3,7 @@ import UserDAO from '../daos/user_dao'
 import CommonError from './../commons/errors/common_error'
 import { ResponseCode } from '../commons/const/response_consts'
 import DateTimeUtils from '../utils/data_time_utils'
+import DataUtils from '../utils/data_utils'
 
 class UserService extends BaseService {
     constructor() {
@@ -29,8 +30,11 @@ class UserService extends BaseService {
             )
         }
 
+        const activeCode = DataUtils.randomKey();
+
+
         const currentMsTime = DateTimeUtils.getCurrentMsTime()
-        const insertedUser = await this.dao.insertRecord(userData)
+        const insertedUser = await this.dao.insertRecord(Object.assign(userData, {activeCode: { code: activeCode, createAt: currentMsTime }}))
 
         return insertedUser
     }

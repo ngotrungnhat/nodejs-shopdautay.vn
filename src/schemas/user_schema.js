@@ -65,8 +65,12 @@ const UserSchema = new Schema(
         },
         activeCode: {
             code: {
-                default: null,
-                type: Number
+                type: String,
+                default: null
+            },
+            createAt: {
+                type: Number,
+                default: 0
             }
         }
     },

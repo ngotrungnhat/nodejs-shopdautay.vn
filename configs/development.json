@@ -9,5 +9,10 @@
     "token": {
         "secret_key": "secret_key",
         "lifetimes": 36000
-    }
+    },
+    "email_sender": {
+        "username": "ngonhat000@gmail.com",
+        "password": "shmily2515"
+    },
+    "code_lifetimes": 8640000
 }

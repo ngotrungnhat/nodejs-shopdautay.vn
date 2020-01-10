@@ -4,6 +4,7 @@ import CommonError from './../commons/errors/common_error'
 import { ResponseCode } from '../commons/const/response_consts'
 import DateTimeUtils from '../utils/data_time_utils'
 import DataUtils from '../utils/data_utils'
+import EmailUtils from '../utils/email_utils'
 
 class UserService extends BaseService {
     constructor() {
@@ -32,11 +33,22 @@ class UserService extends BaseService {
 
         const activeCode = DataUtils.randomKey();
 
-
         const currentMsTime = DateTimeUtils.getCurrentMsTime()
         const insertedUser = await this.dao.insertRecord(Object.assign(userData, {activeCode: { code: activeCode, createAt: currentMsTime }}))
-
+        setTimeout(this.sendNewUserEmail, 1000, insertedUser, activeCode)
         return insertedUser
+    }
+
+    sendNewUserEmail(user, activeCode) {
+        const { email, firstName, lastName } = user
+        const subject = `Active user`
+        const content = `Hi ${firstName}, your active code is ${activeCode}`
+        const emailToSend = {
+            subject: subject,
+            content: content
+        }
+
+        EmailUtils.sendOneMail(email, emailToSend)
     }
 }
 

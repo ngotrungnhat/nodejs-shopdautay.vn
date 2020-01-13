@@ -11,6 +11,8 @@ class UserController extends BaseController {
         super(new UserService())
         this.createNormallUser = this.createNormallUser.bind(this)
         this._validateRequestBodyForCreateNormalUser = this._validateRequestBodyForCreateNormalUser.bind(this)
+        this.activeNormalUser = this.activeNormalUser.bind(this)
+        this._validateRequestBodyForActiveNormalUser = this._validateRequestBodyForActiveNormalUser.bind(this)
     }
 
     async createNormallUser(req, res, next) {
@@ -52,6 +54,39 @@ class UserController extends BaseController {
             errors.push(new ApiError(ErrorCode.INVALID_PARAM, "Invalid address", LocationType.BODY, "/address"));
         }
 
+        if (errors.length) {
+            throw errors
+        }
+    }
+
+    async activeNormalUser(req, res, next) {
+        const requestBody = req.body
+        const { email, code } = requestBody
+
+        try {
+            this._validateRequestBodyForActiveNormalUser(requestBody)
+        } catch (errors) {
+            const responseBody = new ErrorResponse(undefined, ErrorMessage.VALIDATION_FAILED, errors)
+            return res.status(ResponseCode.VALIDATION_FAILED).json(responseBody)
+        }
+
+        const userActive = await this.service.activeNormalUser(email, code)
+        const responseBody = new SuccessResponse(ResponseCode.OK, "Active user success", userActive)
+        return res.status(ResponseCode.NO_CONTENT).send(responseBody)
+    }
+
+    _validateRequestBodyForActiveNormalUser(requestBody) {
+        const errors = []
+        const { email, code } = requestBody
+    
+        if (!DataUtils.isHasValue(code)) {
+            errors.push(new ApiError(ErrorCode.INVALID_PARAM, `Do not exits code`, LocationType.BODY, "/code"))
+        }
+    
+        if (!DataUtils.isHasValue(email) || !DataUtils.isValidEmailAddress(email)) {
+            errors.push(new ApiError(ErrorCode.INVALID_PARAM, `Do not exits email`, LocationType.BODY, "/email"))
+        }
+    
         if (errors.length) {
             throw errors
         }

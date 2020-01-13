@@ -13,9 +13,11 @@ class BaseDAO {
         await record.save()
         return record
     }
-    // async updateRecord(record) {
-    //     await record.save()
-    // }
+
+    async updateRecord(record) {
+        await record.save()
+    }
+    
     // async deleteRecordById(id) {
     //     await this.schema.findByIdAndDelete(id)
     // }

@@ -72,8 +72,6 @@ class DataUtils {
                 .toString("hex")
                 .toUpperCase()
     }
-
-
 }
 
 export default DataUtils; 

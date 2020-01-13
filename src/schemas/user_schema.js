@@ -26,7 +26,7 @@ const UserSchema = new Schema(
             unique: true,
         },
         phone: {
-            type: Number,
+            type: String,
             unique: true,
         },
         password: String,
@@ -34,8 +34,8 @@ const UserSchema = new Schema(
         aboutMe: String,
         address: String,
         isActive: {
-            type: Number,
-            default: 0,
+            type: Boolean,
+            default: false,
             createdAt: {
                 type: Number,
                 default: null,

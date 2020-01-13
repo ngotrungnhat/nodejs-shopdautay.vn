@@ -32,4 +32,21 @@ export const ResponseCode = {
     INTERNAL_SERVER_ERROR: 500,
 }
 
-export const ResponseBodyCode = {}
+export const ResponseBodyCode = {
+    COMMON: {
+        OK: "ok"
+    },
+    LOGIN: {
+        USER_NOT_FOUND: 'user not found',
+        USER_NOT_ACTIVE: 'user not active',
+        PASSWORD_INCORRECT: 'password incorrect'
+    },
+    TOKEN_AUTH: {
+        NO_TOKEN: 'no token',
+        INVALID_TOKEN: 'invalid token'
+    },
+    ACTIVE_USER: {
+        CODE_NOT_MATCH: 'code not match',
+        CODE_EXPIRED: 'code expired' 
+    }
+}

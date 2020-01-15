@@ -36,10 +36,16 @@ const UserSchema = new Schema(
         isActive: {
             type: Boolean,
             default: false,
-            createdAt: {
-                type: Number,
-                default: null,
+        },
+        activeCode: {
+            code: {
+                type: String,
+                default: null
             },
+            createAt: {
+                type: Number,
+                default: 0
+            }
         },
         cart: {
             type: Array,
@@ -62,16 +68,6 @@ const UserSchema = new Schema(
                 type: Number,
                 default: 0
             }
-        },
-        activeCode: {
-            code: {
-                type: String,
-                default: null
-            },
-            createAt: {
-                type: Number,
-                default: 0
-            }
         }
     },
     { collection: Collections.USERS }
@@ -86,6 +82,33 @@ UserSchema.pre('save', async function(next) {
     }
     next()
 })
+
+//match pass sử dụng cho login
+UserSchema.methods.isMatchPasswordSync = async function(plainText) {
+    const { password } = this
+    const isMatch = await bcrypt.compareSync(plainText, password)
+    return isMatch
+}
+
+//Xác thực mã token dùng cho login
+UserSchema.methods.generateAccessToken = function() {
+    const { _id, email } = this;
+    const payload = {
+        id: _id,
+        email: email
+    }
+    const options = {
+        expiresIn: configData.token.lifetimes
+    }
+    const secret = configData.token.secret_key
+    const token = jwt.sign(payload, secret, options)
+
+    return token;
+};
+
+
+
+
 //Check pass dùng cho login
 // UserSchema.methods.isMatchPasswordSync = async function(myPlaintextPassword) {
 //     try {
@@ -96,21 +119,7 @@ UserSchema.pre('save', async function(next) {
 //         throw error
 //     }
 // }
-//Xác thực mã token dùng cho login
-// UserSchema.methods.generateAccessToken = async function() {
-//     const { _id, email } = this
-//     const payload = {
-//         id: _id,
-//         email: email,
-//     }
-//     const secret_sign = configData.token.secret_key
-//     const options = {
-//         expiresIn: configData.token.lifetimes,
-//     }
-//     const token = await jwt.sign(payload, secret_sign, options)
-//     return token
-// }
 
-// UserSchema.plugin(timestamps)
+
 
 export default mongoose.model('UserSchema', UserSchema)
